@@ -21,6 +21,12 @@ struct Args {
 
     #[arg(short, long, default_value_t = 1.0)]
     deltag: f64,
+
+    #[arg(short, long, default_value_t = 0.0)]
+    min: f64,
+
+    #[arg(short = 'x', long, default_value_t = 4000.0)]
+    max: f64,
 }
 
 fn main() {
@@ -32,7 +38,13 @@ fn main() {
     };
 
     let spec = Spectrum::load(s);
-    let (x, y) = spec.sim(args.line_shape, args.npoints, args.deltag);
+    let (x, y) = spec.sim(
+        args.line_shape,
+        args.npoints,
+        args.deltag,
+        args.min,
+        args.max,
+    );
 
     for (x, y) in x.iter().zip(y) {
         println!("{x:10.4} {y:10.8}");

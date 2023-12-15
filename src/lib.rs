@@ -46,15 +46,10 @@ impl Spectrum {
         shape: LineShape,
         npoints: usize,
         deltag: f64,
+        min: f64,
+        max: f64,
     ) -> (Vec<f64>, Vec<f64>) {
         let nstates = self.freqs.len();
-        // let min = *self.freqs.iter().min_by(|a, b| a.total_cmp(b)).unwrap();
-        // let max = *self.freqs.iter().max_by(|a, b| a.total_cmp(b)).unwrap();
-
-        // for some reason these are hard-coded when they used to be calculated.
-        // we'll see which way we want to go
-        let min = 100.;
-        let max = 3800.;
         let x = self.energy_range(min, max, deltag, npoints);
         let mut y = vec![0.0; npoints];
         for i in 0..nstates {
@@ -122,7 +117,7 @@ mod tests {
     #[test]
     fn full() {
         let s = Spectrum::load(read_to_string("testfiles/h2o.in").unwrap());
-        let (x, y) = s.sim(LineShape::Gaussian, 4000, 1.0);
+        let (x, y) = s.sim(LineShape::Gaussian, 4000, 1.0, 100., 3800.);
         let (wantx, wanty): (Vec<f64>, Vec<f64>) =
             read_to_string("testfiles/h2o.want")
                 .unwrap()
