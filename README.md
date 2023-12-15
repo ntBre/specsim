@@ -1,0 +1,2 @@
+# specsim
+simulate IR spectra
