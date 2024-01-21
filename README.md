@@ -28,11 +28,11 @@ The first line is the only part strictly related to `specsim`, but you can use
 output shown below.
 
 ``` shell
-specsim -d 5 testfiles/h2o.in					\
-	| gnuplot									\
-		  -e 'set terminal pngcairo'			\
-		  -e 'set output "/tmp/example.png"'	\
-		  -e 'unset key'						\
+specsim -d 5 testfiles/h2o.in \
+	| gnuplot \
+		  -e 'set terminal pngcairo' \
+		  -e 'set output "/tmp/example.png"' \
+		  -e 'unset key' \
 		  -e 'plot "-" with lines'
 ```
 
